@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "SFPro";
+  src: url(./font/sf-pro.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "SFPro";
+  width: 100vw;
+  height: 100vh;
+}
+
+.iphone {
+  background-image: url(./images/frame.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 340px;
+  height: 700px;
+  overflow: hidden;
+}
+
+.home-screen {
+  background-image: url(./images/Iphone-iOS-Wallpaper.jpg);
+  background-position: center;
+  background-size: contain;
+  border-radius: 65px;
+  height: 690px;
+  z-index: -1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.status-bar {
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+  padding: 5px 50px;
+  padding-top: 23px;
+  width: 100%;
+}
+
+.status-bar i {
+  margin-left: 6px;
+}
+
+.home-screen-apps {
+  box-sizing: border-box;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 50px);
+  gap: 30px;
+  justify-content: center;
+  padding: 35px 10px 10px;
+}
+
+.app {
+  text-align: center;
+}
+
+.app .icon {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-image: url(https://www.dropbox.com/s/dx2rln3r2cni89c/icons.jpg?raw=1);
+  background-size: 1440px 60px;
+  border-radius: 15px;
+  transform: scale(0.85);
+  transform-origin: top left;
+}
+
+.app .name {
+  font-size: 12px;
+  color: white;
+  margin-top: 4px;
+}
+
+.home-screen-docker {
+  height: 130px;
+  box-sizing: border-box;
+  padding: 10px 20px;
+}
+
+.docker {
+  border-radius: 35px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  grid-template-columns: repeat(auto-fill, 60px);
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+}
+
+.docker .app .icon {
+  transform-origin: center;
+  transform: scale(0.9);
+}
