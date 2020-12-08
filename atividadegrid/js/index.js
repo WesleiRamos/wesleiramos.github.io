@@ -13,7 +13,7 @@ const methods = {
   ...scrollMethods,
   ...playerMethods,
 
-  getBackgroundFeatured({ background, color }) {
+  getBackgroundFeatured({ background  }) {
     return {
       background,
       backgroundPosition: 'center top',

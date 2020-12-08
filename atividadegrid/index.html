@@ -67,7 +67,7 @@
       </div>
 
       <div class="featured" ref="featured">
-        <div class="song-card" v-for="song in featured" @click="changeSong(song)" :style="getBackgroundFeatured(song)">
+        <div class="song-card" v-for="(song, index) in featured" @click="changeSong(song, index, 1)" :style="getBackgroundFeatured(song)">
           <div class="name">
             <h2>{{ song.name }}</h2>
           </div>
@@ -94,7 +94,7 @@
       <p style="font-size: 15px; margin-top: 10px;">Os hits que você precisa conhecer</p>
 
       <div class="recommended">
-        <div class="recommended-song" v-for="song in recommended">
+        <div class="recommended-song" v-for="(song, index) in recommended" @click="changeSong(song, index, 2)" >
           <div class="artwork" :style="getBackgroundArtwork(song)"></div>
           <p class="name">{{ song.name }}</p>
           <p class="artist">{{ song.artist }}</p>
@@ -118,17 +118,17 @@
       <div class="player-controls">
         <div class="controls">
           <i class="material-icons">repeat</i>
-          <i class="material-icons">chevron_left</i>
+          <i class="material-icons" @click="nextSong(-1)">chevron_left</i>
 
           <img :src="`images/icons/${player.paused ? 'Play' : 'Pause'}.png`" class="play-pause" @click="playPause">
           
-          <i class="material-icons">chevron_right</i>
+          <i class="material-icons" @click="nextSong(1)">chevron_right</i>
           <i class="material-icons">shuffle</i>
         </div>
 
         <div class="player-progress">
           <span class="time">{{ formatTime(player.currentTime) }}</span>
-          <range-slider :max="player.maxLength" value="0" @change="playerBarChange" @change="previewTime" @click="seeking" ref="seekbar"></range-slider>
+          <range-slider :max="player.maxLength" value="0" @change="playerBarChange" @input="previewTime" @mousedown="seeking" ref="seekbar"></range-slider>
           <span class="time">{{ formatTime(player.maxLength) }}</span>
         </div>
       </div>

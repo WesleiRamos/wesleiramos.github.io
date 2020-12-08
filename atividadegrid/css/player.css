@@ -45,12 +45,12 @@ range-slider:focus .thumb {
 }
 
 .playing-now .song-info h2 {
-  font-size: 20px;
+  font-size: 17px;
   text-transform: uppercase;
 }
 
 .playing-now .song-info p {
-  font-size: 15px;
+  font-size: 12px;
   text-transform: capitalize;
 }
 
