@@ -133,6 +133,10 @@
   margin-bottom: 10px;
 }
 
+.recommended-song .name {
+  text-transform: capitalize;
+}
+
 .recommended-song .artist {
   font-size: 13px;
 }
