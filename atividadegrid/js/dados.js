@@ -264,7 +264,17 @@ const recommended = shuffleArray([
     name: 'Playing To Lose',
     artist: 'Lemaitre',
     artwork: './images/artwork/playing-to-lose.jpg',
-  }
+  },
 
-  //
+  {
+    name: 'Lose Yourself To Dance',
+    artist: 'Daft Punk, Pharrell Williams',
+    artwork: './images/artwork/lose-yourself-to-dance.jpg',
+  },
+
+  {
+    name: 'Have You Ever Seen The Rain',
+    artist: 'Creedence Clearwater Revival',
+    artwork: './images/artwork/have-u-ever-seen-the-rain.jpg',
+  }
 ])
