@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Spozer</title>
+  <meta charset="UTF-8">
+  <script src="js/dados.js"></script>
+  <link href="https://unpkg.com/range-slider-element@latest/dist/styles.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.1/vue.global.js"></script>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div class="mizer">
+    <div class="menu">
+
+      <div class="logo"></div>
+
+      <ul>
+        <li><i class="material-icons">home</i>Início</li>
+        <li><i class="material-icons">radio</i>Rádio</li>
+        <li><i class="material-icons">search</i>Procurar</li>
+      </ul>
+
+      <ul class="submenu">
+        <li><h4>Sua biblioteca</h4></li>
+        <li>Tocadas recentemente</li>
+        <li>Músicas favoritas</li>
+        <li>Artistas</li>
+        <li>Albuns</li>
+      </ul>
+
+      <ul class="submenu">
+        <li><h4>Playlists</h4></li>
+        <li>Mint</li>
+        <li>No Repeat</li>
+        <li>Nostalgia</li>
+        <li>Top 50 artistas 2020</li>
+        <li>Deixa os garotu brincá</li>
+        <li>Top Brasil</li>
+        <li>Peaceful Piano</li>
+      </ul>
+    </div>
+    
+    <div class="content">
+      <div class="toolbar">
+        <div class="search-box">
+          <i class="material-icons">search</i>
+          <input type="text" placeholder="O que você quer ouvir?">
+        </div>
+
+        <div class="tools">
+          <i class="material-icons">settings</i>
+          <i class="material-icons">notifications</i>
+          <img src="./images/avatares/weslei.jpg" style="width: 40px; border-radius: 50%;">
+        </div>
+      </div>
+
+      <div class="featured-buttons">
+        <div @click="prevFeatured" :style="canPrev">
+          <i class="material-icons">chevron_left</i>
+        </div>
+
+        <div @click="nextFeatured" :style="canNext">
+          <i class="material-icons">chevron_right</i>
+        </div>
+      </div>
+
+      <div class="featured" ref="featured">
+        <div class="song-card" v-for="song in featured" @click="changeSong(song)" :style="getBackgroundFeatured(song)">
+          <div class="name">
+            <h2>{{ song.name }}</h2>
+          </div>
+
+          <div class="aaa">
+            <div class="album">
+              <div>
+                <p>Album</p>
+                <h2>{{ song.album }}</h2>
+              </div>
+            </div>
+
+            <div class="artist">
+              <div>
+                <p>Artista</p>
+                <h2>{{ song.artist }}</h2>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+
+      <h2>Recomendadas</h2>
+      <p style="font-size: 15px; margin-top: 10px;">Os hits que você precisa conhecer</p>
+
+      <div class="recommended">
+        <div class="recommended-song" v-for="song in recommended">
+          <div class="artwork" :style="getBackgroundArtwork(song)"></div>
+          <p class="name">{{ song.name }}</p>
+          <p class="artist">{{ song.artist }}</p>
+        </div>  
+      </div>
+    </div>
+
+    <div class="player">
+      <div class="playing-now">
+        <template v-if="player.currentSong">
+          <img :src="player.currentSong.artwork">
+          <div class="song-info" >
+            <h2>{{ player.currentSong.name }}</h2>
+            <p style="color: gray">{{ player.currentSong.artist }}</p>
+          </div>
+        </template>
+        <div style="width: 247px;" v-else></div>
+      </div>
+
+
+      <div class="player-controls">
+        <div class="controls">
+          <i class="material-icons">repeat</i>
+          <i class="material-icons">chevron_left</i>
+
+          <img :src="`images/icons/${player.paused ? 'Play' : 'Pause'}.png`" class="play-pause" @click="playPause">
+          
+          <i class="material-icons">chevron_right</i>
+          <i class="material-icons">shuffle</i>
+        </div>
+
+        <div class="player-progress">
+          <span class="time">{{ formatTime(player.currentTime) }}</span>
+          <range-slider :max="player.maxLength" value="0" @change="playerBarChange" @change="previewTime" @click="seeking" ref="seekbar"></range-slider>
+          <span class="time">{{ formatTime(player.maxLength) }}</span>
+        </div>
+      </div>
+
+      <div class="player-volume">
+        <i class="material-icons">volume_up</i>
+        <range-slider min="1" max="2" value="2"></range-slider>
+      </div>
+    </div>
+  </div>
+  <script src="js/player.js"></script>
+  <script src="js/scroll.js"></script>
+  <script src="js/index.js"></script>
+  <script src="https://unpkg.com/range-slider-element@latest"></script>
+</body>
+</html>

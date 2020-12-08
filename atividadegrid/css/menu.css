@@ -1,0 +1,44 @@
+.menu {
+  grid-area: menu;
+  box-sizing: border-box;
+  border-right: 1px solid #f0f0f0;
+  padding: 10px;
+}
+
+.menu ul {
+  list-style: none;
+}
+
+.menu li {
+  font-size: 16px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.menu li i {
+  margin-right: 10px;
+}
+
+.menu .submenu {
+  margin-top: 30px;
+}
+
+.menu h4 {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.menu .logo {
+  color: white;
+  display: flex;
+  margin: 25px 10px;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #FABD43, #FF4259, #8B17FA);
+  -webkit-mask-image: url(../images/logo.svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  width: 170px;
+  height: 50px;
+}
