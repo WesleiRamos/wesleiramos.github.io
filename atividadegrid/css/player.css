@@ -28,7 +28,7 @@ range-slider:focus .thumb {
 .playing-now {
   display: flex;
   height: 70px;
-  width: 300px;
+  flex: 0 0 300px;
 }
 
 .playing-now img {
@@ -57,7 +57,8 @@ range-slider:focus .thumb {
 .player-controls {
   display: flex;
   flex-direction: column;
-  width: 60vw;
+  flex: 1 1 50vw;
+  margin: 0 40px;
 }
 
 .controls {
