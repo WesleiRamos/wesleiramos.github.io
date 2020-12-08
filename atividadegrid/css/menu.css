@@ -36,9 +36,12 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(to right, #FABD43, #FF4259, #8B17FA);
+  mask-image: url(../images/logo.svg);
+  mask-repeat: no-repeat;
+  position: center;
   -webkit-mask-image: url(../images/logo.svg);
   -webkit-mask-repeat: no-repeat;
-  mask-position: center;
+  -webkit-mask-position: center;
   width: 170px;
   height: 50px;
 }
