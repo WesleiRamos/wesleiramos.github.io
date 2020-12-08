@@ -25,6 +25,10 @@ const playerMethods = {
     }, 100)
   },
 
+  volumeChange({ target }) {
+    PLAYER.volume = parseInt(target.value) / 100
+  },
+
   previewTime({ target }) {
     this.player.currentTime = parseInt(target.value)
   },

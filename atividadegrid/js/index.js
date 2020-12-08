@@ -37,4 +37,4 @@ const app = Vue.createApp({
 })
 
 app.config.isCustomElement = tag => /^range-/.test(tag)
-app.mount('.mizer')
+app.mount('.spozer')

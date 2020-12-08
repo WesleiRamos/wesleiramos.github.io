@@ -9,7 +9,7 @@
   font-family: 'Noto Sans', sans-serif;
 }
 
-.mizer {
+.spozer {
   display: grid;
   grid-template-areas: "menu content"
                        "menu content"
