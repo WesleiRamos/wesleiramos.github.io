@@ -2,19 +2,17 @@ const SONG_CARD_SIZE = 800
 
 const scrollData = {
   scroll: {
-    clicks: 0,
     canClick: true,
-    reachedMax: false
+    reachedMax: false,
+    reachedMin: true,
   }
 }
 
 const scrollComputed = {
   canPrev() {
-    const can = this.scroll.clicks > 0
-
     return {
-      color: can ? 'black' : '#f0f0f0',
-      pointerEvents: can ? 'auto' : 'none'
+      color: !this.scroll.reachedMin ? 'black' : '#f0f0f0',
+      pointerEvents: !this.scroll.reachedMin ? 'auto' : 'none'
     }
   },
 
@@ -38,8 +36,11 @@ const scrollMethods = {
    * Carrega os itens anteriores da lista
    */
   prevFeatured() {
-    if (this.scroll.clicks > 0)
-      this.applyScrollMovement(-SONG_CARD_SIZE)
+    this.applyScrollMovement(-SONG_CARD_SIZE)
+  },
+
+  mozillaFix() {
+    this.$refs.featured.scrollLeft = 0
   },
 
   /**
@@ -49,40 +50,27 @@ const scrollMethods = {
   applyScrollMovement(quantity) {
     if (!this.scroll.canClick)
       return
+    
+    this.scroll.canClick = false
 
     const featured = this.$refs.featured
     
-    this.scroll.canClick = false
-    this.scroll.clicks += quantity > 0 ? 1 : -1
-    featured.scrollLeft += quantity
-
-    setTimeout(() => {
-      this.scroll.canClick = true
-
-      if (quantity > 0) {
-        const diff = featured.scrollWidth - (featured.scrollLeft + featured.offsetWidth)
-
-        /**
-         * Se a diferença entre a quantia scrollada e a quantia maxima de scroll que pode ser aplicada
-         * for menor que o tamanho do card então movimentamos até o fim do scroll
-         */
-        if (diff < SONG_CARD_SIZE) {
-          featured.scrollLeft += SONG_CARD_SIZE
-          this.scroll.reachedMax = true
-        } else {
-          this.scroll.reachedMax = featured.scrollLeft + featured.offsetWidth === featured.scrollWidth 
-        }
-      } else {
-
-        /**
-         * Se sobrou uma quantia de scroll ao voltar então resetamos o scroll
-         */
-        if (featured.scrollLeft < SONG_CARD_SIZE) {
-          featured.scrollLeft = 0
-        }
-
-        this.scroll.reachedMax = false 
+    if (quantity > 0) {
+      const sum = featured.scrollLeft + featured.offsetWidth + quantity
+      if ((featured.scrollWidth - sum) < (SONG_CARD_SIZE / 1.3)) {
+        quantity += sum
       }
-    }, 350)
+    } else {
+      const sum = featured.scrollLeft + quantity
+      if (sum < (SONG_CARD_SIZE / 1.3)) {
+        quantity -= featured.scrollLeft + quantity
+      }
+    }
+
+    this.scroll.reachedMin = featured.scrollLeft + quantity <= 0
+    this.scroll.reachedMax = featured.scrollLeft + featured.offsetWidth + quantity >= featured.scrollWidth
+
+    featured.scrollLeft += quantity
+    setTimeout(() => this.scroll.canClick = true, 300)
   }
 }

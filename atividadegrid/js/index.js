@@ -33,6 +33,8 @@ const methods = {
 const app = Vue.createApp({
   methods, computed, data: () => data, created() {
     this.createPlayer()
+  }, mounted() {
+    this.mozillaFix()
   }
 })
 
