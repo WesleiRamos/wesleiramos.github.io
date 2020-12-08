@@ -87,6 +87,15 @@ const playerMethods = {
       if (this.player.currentSongIndex === playlist.length - 1)
         return
     } else {
+      /**
+       * 1 click volta pro inicio
+       * 2 click e o tempo de musica for menor que meio segundo volta pra anterior
+       */
+      if (PLAYER.currentTime > 0.5) {
+        PLAYER.currentTime = 0
+        return
+      }
+
       if (this.player.currentSongIndex === 0)
         return
     }
