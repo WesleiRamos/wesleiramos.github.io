@@ -86,6 +86,17 @@ const playerMethods = {
     this.player.currentPlaylist = playlist
     this.player.currentSong = { ...song }
     PLAYER.load()
+
+
+    if (navigator.mediaSession) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: song.name,
+        artist: song.artist,
+        artwork: [
+          { src: song.artwork, sizes: '96x96' }
+        ]
+      })
+    }
   },
 
   /**
@@ -161,5 +172,14 @@ const playerMethods = {
     PLAYER.addEventListener('timeupdate', () => {
       this.updateProgress(PLAYER.currentTime)
     })
+
+
+    if (navigator.mediaSession) {
+      const mediaSession = navigator.mediaSession
+      mediaSession.setActionHandler('play', () => this.playPause())
+      mediaSession.setActionHandler('pause', () => this.playPause())
+      mediaSession.setActionHandler('nexttrack', () => this.nextSong())
+      mediaSession.setActionHandler('previoustrack', () => this.nextSong(-1))
+    }
   }
 }
