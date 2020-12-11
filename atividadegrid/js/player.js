@@ -15,6 +15,18 @@ const playerData = {
 const playerMethods = {
 
   /**
+   * 
+   */
+  changeTitle() {
+    if (this.player.paused) {
+      document.title = 'Spozer'
+      return
+    } 
+
+    document.title = `${this.player.currentSong.name} · ${this.player.currentSong.artist}`
+  },
+
+  /**
    * Determina se está ou não pulando a musica
    */
   seeking() {
@@ -128,12 +140,13 @@ const playerMethods = {
    * Cria os eventos no player para manipular os controles
    */
   createPlayer() {
-    PLAYER.addEventListener('timeupdate', () => {
-      this.updateProgress(PLAYER.currentTime)
-    })
+    const playPause = value => () => {
+      this.player.paused = value
+      this.changeTitle()
+    }
 
-    PLAYER.addEventListener('pause', () => this.player.paused = true)
-    PLAYER.addEventListener('play', () => this.player.paused = false)
+    PLAYER.addEventListener('play', playPause(false))
+    PLAYER.addEventListener('pause', playPause(true))
 
     PLAYER.addEventListener('canplay', () => {
       this.player.maxLength = PLAYER.duration
@@ -143,6 +156,10 @@ const playerMethods = {
     PLAYER.addEventListener('ended', () => {
       this.player.paused = true
       this.nextSong()
+    })
+
+    PLAYER.addEventListener('timeupdate', () => {
+      this.updateProgress(PLAYER.currentTime)
     })
   }
 }

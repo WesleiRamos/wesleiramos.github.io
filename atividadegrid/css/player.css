@@ -94,3 +94,28 @@ range-slider:focus .thumb {
 .player-volume {
   display: flex;
 }
+
+
+@media (max-width: 850px) {
+  .playing-now {
+    align-items: center;
+    flex: 0 0 30vw;
+  }
+  
+  .playing-now img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .playing-now .song-info h2 {
+    font-size: 12px;
+  }
+  
+  .playing-now .song-info p {
+    font-size: 11px;
+  }
+
+  .player-volume {
+    display: none;
+  }
+}

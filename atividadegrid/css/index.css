@@ -38,3 +38,13 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(65, 65, 65, 0.8);
 }
+
+@media (max-width: 850px) {
+  .spozer {
+    grid-template-columns: 0 1fr;
+  }
+
+  .menu {
+    display: none;
+  }
+}

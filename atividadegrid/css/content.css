@@ -37,7 +37,8 @@
   border: none;
   margin-left: 10px;
   outline: none;
-  width: 300px;
+  width: 50vw;
+  max-width: 400px;
 }
 
 .featured-buttons {
