@@ -159,14 +159,6 @@ const playerMethods = {
     PLAYER.addEventListener('canplay', () => {
       this.player.maxLength = PLAYER.duration
       PLAYER.play()
-
-      if (navigator.mediaSession) {
-        navigator.mediaSession.setPositionState({
-          duration: PLAYER.duration,
-          playbackRate: PLAYER.playbackRate,
-          position: PLAYER.currentTime
-        })
-      }
     })
 
     PLAYER.addEventListener('ended', () => {
@@ -185,14 +177,6 @@ const playerMethods = {
       mediaSession.setActionHandler('pause', () => this.playPause())
       mediaSession.setActionHandler('nexttrack', () => this.nextSong())
       mediaSession.setActionHandler('previoustrack', () => this.nextSong(-1))
-
-      mediaSession.setActionHandler('seekbackward', ({ seekOffset = 0 }) => {
-        this.playerBarChange({ target: { value: Math.min(PLAYER.currentTime + seekOffset, 0) }})
-      })
-
-      mediaSession.setActionHandler('seekbackward', ({ seekOffset = 0 }) => {
-        this.playerBarChange({ target: { value: Math.min(PLAYER.currentTime + seekOffset, PLAYER.duration) }})
-      })
     }
   }
 }
