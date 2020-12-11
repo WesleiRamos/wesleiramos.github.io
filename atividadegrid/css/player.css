@@ -32,6 +32,10 @@ range-slider:focus .thumb {
   flex: 0 0 300px;
 }
 
+.not-playing {
+  width: 247px;
+}
+
 .playing-now img {
   width: 70px;
   height: 70px;
@@ -97,6 +101,10 @@ range-slider:focus .thumb {
 
 
 @media (max-width: 850px) {
+  .not-playing {
+    width: 30vw;
+  }
+
   .playing-now {
     align-items: center;
     flex: 0 0 30vw;
