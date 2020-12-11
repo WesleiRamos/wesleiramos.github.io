@@ -48,6 +48,7 @@
 
 .featured-buttons > div {
   cursor: pointer;
+  user-select: none;
 }
 
 .featured-buttons i {
