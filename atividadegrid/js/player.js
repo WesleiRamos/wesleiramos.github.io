@@ -87,15 +87,12 @@ const playerMethods = {
     this.player.currentSong = { ...song }
     PLAYER.load()
 
-
     if (navigator.mediaSession) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: song.name,
-        artist: song.artist,
-        artwork: [
-          { src: song.artwork, sizes: '96x96' }
-        ]
+      const artwork = [ '96x96', '128x128', '192x192', '256x256', '384x384', '512x512' ].map(sizes => {
+        return { sizes, src: song.artwork }
       })
+      
+      navigator.mediaSession.metadata = new MediaMetadata({ artwork, title: song.name, artist: song.artist })
     }
   },
 
@@ -162,6 +159,14 @@ const playerMethods = {
     PLAYER.addEventListener('canplay', () => {
       this.player.maxLength = PLAYER.duration
       PLAYER.play()
+
+      if (navigator.mediaSession) {
+        navigator.mediaSession.setPositionState({
+          duration: PLAYER.duration,
+          playbackRate: PLAYER.playbackRate,
+          position: PLAYER.currentTime
+        })
+      }
     })
 
     PLAYER.addEventListener('ended', () => {
@@ -180,6 +185,14 @@ const playerMethods = {
       mediaSession.setActionHandler('pause', () => this.playPause())
       mediaSession.setActionHandler('nexttrack', () => this.nextSong())
       mediaSession.setActionHandler('previoustrack', () => this.nextSong(-1))
+
+      mediaSession.setActionHandler('seekbackward', ({ seekOffset = 0 }) => {
+        this.playerBarChange({ target: { value: Math.min(PLAYER.currentTime + seekOffset, 0) }})
+      })
+
+      mediaSession.setActionHandler('seekbackward', ({ seekOffset = 0 }) => {
+        this.playerBarChange({ target: { value: Math.min(PLAYER.currentTime + seekOffset, PLAYER.duration) }})
+      })
     }
   }
 }
